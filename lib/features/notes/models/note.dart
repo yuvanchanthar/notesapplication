@@ -24,7 +24,7 @@ class Note{
        createdAt: DateTime.parse(json['createdAt']));
 
   }
-  Note CopyWith({
+  Note copyWith({
     String? id,
     String?title,
     String?content,

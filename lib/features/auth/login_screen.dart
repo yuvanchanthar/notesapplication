@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notesapplication/features/notes/screens/notes_home_screen.dart';
 
-import 'package:flutter_notesapplication/homepage.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await perfs.setString('username', username);
 
       if(mounted){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const NotesHomeScreen()));
       }
     }
     else{
@@ -160,10 +161,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontFamily: 'Roboto'),)
                           ],),
                         ),
-                        ElevatedButton(onPressed: _isLoading?null:_handleLogin,style: ElevatedButton.styleFrom(elevation: 6), child: _isLoading? const SizedBox(height: 20,width: 20,child: CircularProgressIndicator(
+                        ElevatedButton(
+                          onPressed: _isLoading?null:_handleLogin,
+                          style: ElevatedButton.styleFrom(elevation: 6),
+                           child: _isLoading? const SizedBox(height: 20,
+                           width: 20,child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),):const Text('login',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))
+                        ),)
+                        :const Text('login',
+                        style: TextStyle(fontSize: 16,
+                        fontWeight: FontWeight.bold),))
               
                         
 
