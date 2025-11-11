@@ -38,7 +38,7 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card( 
       margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
       elevation: 2,
       child: ListTile(
