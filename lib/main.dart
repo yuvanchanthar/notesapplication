@@ -6,8 +6,10 @@ import 'package:flutter_notesapplication/services/local_storage.dart';
 
 
 
-void main() {
-  runApp( MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.init();
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -16,7 +18,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(colorScheme: ColorScheme.dark()),
+
       debugShowCheckedModeBanner: false,
       home: InitialScreen()
     );
