@@ -44,7 +44,10 @@ class NoteCard extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         title: Text(note.title,
-        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          fontFamily: 'Georgia',),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,8 +55,8 @@ class NoteCard extends StatelessWidget {
             Text(note.content,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            const SizedBox(height: 10,),
+            style: TextStyle(fontSize: 14,fontFamily: 'Helvetica'),),
+            const SizedBox(height: 8,),
             Text(_formatDate(note.createdAt),style: TextStyle(fontSize: 12,color: Colors.grey[600]),),
 
           ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notesapplication/features/notes/screens/notes_home_screen.dart';
+import 'package:flutter_notesapplication/services/local_storage.dart';
 
 
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,8 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController=TextEditingController();
-  final TextEditingController _passwordController=TextEditingController();
+  final  _usernameController=TextEditingController();
+  final  _passwordController=TextEditingController();
 
   String _errorMessage='';
   bool _isLoading=false;
@@ -37,23 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final password=_passwordController.text.trim();
 
 
-    if(username.isEmpty || password.isEmpty){
-      setState(() {
-        _errorMessage="Username and password cannot be empty";
-        _isLoading=false;
-      });
-
-      return;
-
-
-    }
+   
     if(username==valideUsername && password==validePassword){
-      final perfs=await SharedPreferences.getInstance();
-      await perfs.setBool('isLoggedIn', true);
-      await perfs.setString('username', username);
+      await LocalStorage.setLoggedIn(true);
+      
 
       if(mounted){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const NotesHomeScreen()));
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>const NotesHomeScreen()), (route)=> false,);
       }
     }
     else{
@@ -68,27 +59,26 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        title: Text("Login Page"),
-      ),
-      body:SafeArea(child: Center(
+      body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
                children: [
             Icon(Icons.note_alt_outlined,
             size: 80,
-            color: Colors.blue[700],),
+            
+            color: Theme.of(context).colorScheme.primary,),
              const SizedBox(height: 16),
                             Text(
                   'Notes App',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue[700],
-                    fontFamily: 'Roboto',
+                    color: Theme.of(context).colorScheme.primary,
+                    fontFamily: 'Courier',
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -133,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter Password',
-                            prefixIcon: const Icon(Icons.person_outline),
+                            prefixIcon: const Icon(Icons.lock),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -188,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
       )
       
       
-      ),);
+      );
     
   }
 }
