@@ -7,7 +7,7 @@ import 'package:flutter_notesapplication/services/local_storage.dart';
 
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+ // WidgetsFlutterBinding.ensureInitialized();
   await LocalStorage.init();
   runApp(const MainApp());
 }
