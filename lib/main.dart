@@ -38,9 +38,6 @@ class _InitialScreenState extends State<InitialScreen> {
 
   @override
   void initState() {
-
-
-  
     super.initState();
     checkLoginStatus();
   }
